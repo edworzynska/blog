@@ -3,8 +3,8 @@ import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,4 +94,13 @@ class PostRepositoryTest {
             assertEquals(post1.getId(), comment.getPost().getId());
             }
         }
+
+    @Test
+    void findsPostsByTag() {
+        var resultArr = postRepository.findByTag("life");
+        String titles = "";
+        String sortedArr = resultArr.stream().map(Post::getTitle).sorted().collect(Collectors.joining("\n"));
+        assertEquals(List.of(post1, post2).size(), resultArr.size());
+        assertEquals("my first post\nmy second post", sortedArr);
+    }
 }

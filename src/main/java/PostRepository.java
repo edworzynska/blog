@@ -47,4 +47,12 @@ public class PostRepository {
         }
         return commentsToPost;
     }
+    public List<Post> findByTag(String tagName){
+        List<Post> posts = null;
+        Session session = sessionFactory.openSession();
+        posts = session.createQuery("select p from Post p join fetch p.tags t where t.name = :name", Post.class)
+                .setParameter("name", tagName)
+                .getResultList();
+        return posts;
+    }
 }
