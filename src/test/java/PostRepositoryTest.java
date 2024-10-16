@@ -19,6 +19,8 @@ class PostRepositoryTest {
     private static Comment comment2;
     private static Comment comment3;
     private static Comment comment4;
+    private static Tag tag1;
+    private static Tag tag2;
 
 
     @BeforeEach
@@ -29,6 +31,7 @@ class PostRepositoryTest {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
 
+
         post1 = new Post();
         post1.setTitle("my first post");
         post1.setContent("hello friends");
@@ -38,6 +41,18 @@ class PostRepositoryTest {
         post2.setTitle("my second post");
         post2.setContent("I had an amazing day! I learnt some java");
         session.persist(post2);
+
+
+        tag1 = new Tag();
+        tag1.setName("life");
+        tag1.posts.add(post1);
+        tag1.posts.add(post2);
+        session.persist(tag1);
+
+        tag2 = new Tag();
+        tag2.setName("coding");
+        tag2.posts.add(post2);
+        session.persist(tag2);
 
         comment1 = new Comment();
         comment1.setAuthor("anonymous");

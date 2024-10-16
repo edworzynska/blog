@@ -18,6 +18,7 @@ public class HibernateUtil {
             sessionFactory = new MetadataSources(registry)
                     .addAnnotatedClass(Post.class)
                     .addAnnotatedClass(Comment.class)
+                    .addAnnotatedClass(Tag.class)
                     .buildMetadata()
                     .buildSessionFactory();
         } catch (Exception e) {
