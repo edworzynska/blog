@@ -13,6 +13,7 @@ public class Comment {
     @GeneratedValue
     private Long id;
 
+//Getters and Setter everywhere could be replaced with @Data or @Value class annotation
     @Getter
     @Setter
     @Column(name="author")
